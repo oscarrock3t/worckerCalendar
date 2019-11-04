@@ -1,0 +1,73 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+
+.sidebar {
+	display: none;
+}
+
+.container {
+	max-width: 960px;
+	margin: 0 auto;
+}
+
+.today-box {
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	margin: 20px 0;
+	text-align: center;
+	font-size: 32px;
+}
+
+.monthes-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	grid-gap: 30px;
+}
+
+.month {
+	padding: 15px;	
+	text-align: center;
+	border-radius: 15px;
+	box-shadow: 0 0 5px #000;
+	transition: box-shadow .3s ease;
+}
+
+.month:hover {
+	box-shadow: 0 0 7px #f00;
+}
+
+.month-title{
+	font-size: 24px;
+	margin-bottom: 10px;
+}
+
+.month-daysName,
+.month-days {
+	display: grid;
+	grid-template-columns: repeat(7,1fr);
+}
+
+.month-days > p {
+	cursor: pointer;
+
+}
+
+.month-days > p:hover {
+	background: #999;
+}
+
+.hollyday{
+	color: red;
+}
+
+.today {
+	border: 1px solid red;
+	border-radius: 50%;
+}
