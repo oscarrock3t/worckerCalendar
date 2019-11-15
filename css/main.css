@@ -1,6 +1,12 @@
+@import 'fonts.css';
 *{
 	padding: 0;
 	margin: 0;
+}
+
+body {
+	
+	font-family: 'Lato', sans-serif;
 }
 
 .sidebar {
@@ -28,46 +34,61 @@
 .monthes-grid {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-	grid-gap: 30px;
+	grid-gap: 5px;
 }
 
-.month {
-	padding: 15px;	
+.month {	
+	padding: 10px;
 	text-align: center;
-	border-radius: 15px;
-	box-shadow: 0 0 5px #000;
-	transition: box-shadow .3s ease;
-}
+	transition: box-shadow .1s ease;
+}	
 
 .month:hover {
-	box-shadow: 0 0 7px #f00;
+	box-shadow: 0 0 5px #000;
 }
 
 .month-title{
-	font-size: 24px;
-	margin-bottom: 10px;
+	text-align: left;
+	font-size: 28px;
+	margin-bottom: 20px;
 }
 
 .month-daysName,
 .month-days {
 	display: grid;
 	grid-template-columns: repeat(7,1fr);
+	font-size: 20px;
+	text-transform: uppercase;
 }
 
 .month-days > p {
 	cursor: pointer;
+	font-size: 20px;
+	line-height: 42.56px;
+	height: 42.56px;
 
 }
 
 .month-days > p:hover {
-	background: #999;
+	background: rgba(255,0,0,.4);
 }
 
 .hollyday{
 	color: red;
 }
 
+.current-month {
+	border: 1px solid #888;
+}
+
 .today {
-	border: 1px solid red;
-	border-radius: 50%;
+	border: 1px solid #888;
+}
+
+.day {
+	user-select: none;
+}
+
+.selectedDay {
+	background: navy;
 }
