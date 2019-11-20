@@ -69,7 +69,6 @@ body {
 }
 
 .month-days > p:hover {
-	box-shadow: 0 0 1px rgba(0,0,0,1);
 	background: #ff6565;
 }
 
@@ -82,8 +81,8 @@ body {
 }
 
 .today {
-	border: 1px solid #888;
 	box-shadow: 0 0 1px #000;
+	background: rgba(0,0,0,.3);
 }
 
 .day {
@@ -92,5 +91,4 @@ body {
 
 .selectedDay {
 	background: #ffc0c0;
-	box-shadow: 0 0 1px rgba(0,0,0,.9);
 }
