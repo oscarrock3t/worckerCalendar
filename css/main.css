@@ -29,6 +29,7 @@ body {
 	margin: 20px 0;
 	text-align: center;
 	font-size: 32px;
+	text-transform: capitalize;
 }
 
 .monthes-grid {
@@ -43,11 +44,9 @@ body {
 	transition: box-shadow .1s ease;
 }	
 
-.month:hover {
-	box-shadow: 0 0 5px #000;
-}
-
 .month-title{
+	font-weight: normal;
+	text-transform: uppercase;
 	text-align: left;
 	font-size: 28px;
 	margin-bottom: 20px;
@@ -70,7 +69,8 @@ body {
 }
 
 .month-days > p:hover {
-	background: rgba(255,0,0,.4);
+	box-shadow: 0 0 1px rgba(0,0,0,1);
+	background: #ff6565;
 }
 
 .hollyday{
@@ -83,6 +83,7 @@ body {
 
 .today {
 	border: 1px solid #888;
+	box-shadow: 0 0 1px #000;
 }
 
 .day {
@@ -90,5 +91,6 @@ body {
 }
 
 .selectedDay {
-	background: navy;
+	background: #ffc0c0;
+	box-shadow: 0 0 1px rgba(0,0,0,.9);
 }
