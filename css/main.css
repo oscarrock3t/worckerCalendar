@@ -1,21 +1,60 @@
 @import 'fonts.css';
+
 *{
 	padding: 0;
 	margin: 0;
 }
 
 body {
-	
 	font-family: 'Lato', sans-serif;
 }
 
-.sidebar {
-	display: none;
+.container {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr;
+	grid-template-areas: "schedule-body calendar-body calendar-body calendar-body any-body" "schedule-body calendar-body calendar-body calendar-body any-body" "schedule-body calendar-body calendar-body calendar-body any-body";
 }
 
-.container {
-	max-width: 960px;
+.calendar-body {
+	grid-area: calendar-body;
+}
+
+.schedule-body { 
+	grid-area: schedule-body;
+	padding-top: 250px;
+}
+
+.schedule-body-title {
+	font-weight: normal;
+	text-align: center;
+	font-size: 28px;
+	margin-bottom: 20px;
+}
+
+.schedule-variables {
+	text-align: center;
 	margin: 0 auto;
+	width: 75%;
+}
+
+.schedule-variable {
+	padding: 10px;
+	user-select: none;
+	margin-bottom: 20px;
+	cursor: pointer;
+}
+
+.schedule-variable:hover {
+	background: #ff6565;
+}
+
+.schedule-variable:last-child {
+	margin: 0;
+}
+
+.any-body {
+	grid-area: any-body;
 }
 
 .today-box {
@@ -56,7 +95,7 @@ body {
 .month-days {
 	display: grid;
 	grid-template-columns: repeat(7,1fr);
-	font-size: 20px;
+	font-size: 18px;
 	text-transform: uppercase;
 }
 
@@ -81,14 +120,14 @@ body {
 }
 
 .today {
-	box-shadow: 0 0 1px #000;
-	background: rgba(0,0,0,.3);
+	border: 1px solid #666;
 }
 
 .day {
 	user-select: none;
 }
 
+.selectedSchedule,
 .selectedDay {
 	background: #ffc0c0;
 }

@@ -4,14 +4,15 @@ var	nameMonth = ['январь','февраль','март','апрель','ма
 	euNameDays = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'],
 	euShortNameDays = ['su','mo','tu','we','th','fr','sa'],
 	monthes = document.querySelectorAll('.month'),
-	stateDate = new Date();
+	stateDate = new Date(),
+	schedule = 0;
 
 window.onload = () => {
 	renderCalendar();
 	currentTime();
 	currentDate();
 }
-//--------------------------------------------------
+
 
 function currentDate() {
 	currentDay = date.getDate(),
@@ -36,7 +37,7 @@ function currentTime() {
 		return i < 10 ?  '0' + i : i;
 	};	
 };
-//----------------------------------------------
+
 function renderCalendar() { 													//добавление в ХТМЛ - названий и количество дней в месяц
 	monthes.forEach((e, i) => { 												//для каждого блока
 		e.querySelector('.month-title').append(nameMonth[i]); 					//добавление заголовков
@@ -71,21 +72,81 @@ function todayDay() {
 //ВЫБИРАЕТСЯ ПЕРВЫЙ РАБОЧИЙ ДЕНЬ СМЕНЫ
 //РАСЧИТЫВАЕТСЯ ГРАФИК РАБОЧИХ ДНЕЙ
 
+function removeSelectSchedule(elem){ //выделяет выбранный класс 
+	let schedules = document.querySelectorAll('.schedule-variable');
+	schedules.forEach((e) => {
+		$(e).removeClass('selectedSchedule');
+	});
+	$(elem).addClass('selectedSchedule');
+	allDays.forEach((e) =>{
+		$(e).removeClass('selectedDay');
+	});
+}
+
+$(document).on('click', '.schedule-5for2', function() {
+	schedule = '5for2';
+	removeSelectSchedule(this);
+	_5for2();
+});
+
+$(document).on('click', '.schedule-2for2', function() {
+	schedule = '2for2';
+	removeSelectSchedule(this);
+	_2for2();
+});
+
+$(document).on('click', '.schedule-1for1', function() {
+	schedule = '1for1';
+	removeSelectSchedule(this);
+	_1for1();
+});
+
 $(document).on('click', '.day', function () {
 	allDays.forEach((e) =>{
 		$(e).removeClass('selectedDay');
 	});
-	for(let i = allDays.indexOf(this); i < allDays.length; i++) {
-		$(allDays[i]).addClass('selectedDay');
-		$(allDays[i+1]).addClass('selectedDay');
-		i += 3;
+	switch (schedule) {
+		case '5for2':
+			for(let i = allDays.indexOf(this); i < allDays.length; i++) {
+				$(allDays[i]).addClass('selectedDay');
+				$(allDays[i+1]).addClass('selectedDay');
+				$(allDays[i+2]).addClass('selectedDay');
+				$(allDays[i+3]).addClass('selectedDay');
+				$(allDays[i+4]).addClass('selectedDay');
+				i += 6;
+			}
+			for(let i = allDays.indexOf(this); i > 0; i--) {
+				$(allDays[i-7]).addClass('selectedDay');
+				$(allDays[i-6]).addClass('selectedDay');
+				$(allDays[i-5]).addClass('selectedDay');
+				$(allDays[i-4]).addClass('selectedDay');
+				$(allDays[i-3]).addClass('selectedDay');
+				i -= 6;
+			}
+		break;
+		case '2for2':
+			for(let i = allDays.indexOf(this); i < allDays.length; i++) {
+				$(allDays[i]).addClass('selectedDay');
+				$(allDays[i+1]).addClass('selectedDay');
+				i += 3;
+			}
+			for(let i = allDays.indexOf(this); i > 0; i--) {
+				$(allDays[i-3]).addClass('selectedDay');
+				$(allDays[i-4]).addClass('selectedDay');
+				i -= 3;
+			}
+		break;
+		case '1for1':
+			for(let i = allDays.indexOf(this); i < allDays.length; i++) {
+				$(allDays[i]).addClass('selectedDay');
+				i += 1;
+			}
+			for(let i = allDays.indexOf(this); i > 0; i--) {
+				$(allDays[i-2]).addClass('selectedDay');
+				i -= 1;
+			}
+		break;
 	}
-	for(let i = allDays.indexOf(this); i > 0; i--) {
-		$(allDays[i-3]).addClass('selectedDay');
-		$(allDays[i-4]).addClass('selectedDay');
-		i -= 3;
-	}
-
-
 
 });
+
