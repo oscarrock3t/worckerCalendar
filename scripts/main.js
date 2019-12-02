@@ -6,12 +6,9 @@ var	nameMonth = ['январь','февраль','март','апрель','ма
 	monthes = document.querySelectorAll('.month'),
 	stateDate = new Date(),
 	schedule = 0;
-
-window.onload = () => {
-	renderCalendar();
-	currentTime();
-	currentDate();
-}
+renderCalendar();
+currentTime();
+currentDate();
 
 
 function currentDate() {
@@ -20,22 +17,25 @@ function currentDate() {
 	currentYear = date.getYear()%100,
 	nameToday = date.getDay();
 	document.querySelector('.today-day').innerHTML = `${ruNameDays[nameToday]}, ${currentDay} ${monthToday()} 20${currentYear}`;
-	function monthToday() {
-		return currentMonth == 2 || currentMonth == 7 ?	nameMonth[currentMonth] + 'а' :	nameMonth[currentMonth].slice(0,-1) + 'я';
-	};
 	setInterval(function() {
 		currentTime();
 	},1000); 
 };
+
+function monthToday() {
+	return currentMonth == 2 || currentMonth == 7 ?	nameMonth[currentMonth] + 'а' :	nameMonth[currentMonth].slice(0,-1) + 'я';
+};
+
+function beautifyNumbers(i) {
+	return i < 10 ?  '0' + i : i;
+};	
+
 function currentTime() {
 	date = new Date(),
 	currentHour = beautifyNumbers(date.getHours()),
 	currentMinute = beautifyNumbers(date.getMinutes()),
 	currentSecond = beautifyNumbers(date.getSeconds());
 	document.querySelector('.today-time').innerHTML = `${currentHour}:${currentMinute}:${currentSecond}`;
-	function beautifyNumbers(i) {
-		return i < 10 ?  '0' + i : i;
-	};	
 };
 
 function renderCalendar() { 													//добавление в ХТМЛ - названий и количество дней в месяц
@@ -51,28 +51,22 @@ function renderCalendar() { 													//добавление в ХТМЛ - н
 		}	
 	});
 	todayDay();																	//выбор текущего-сегодняшнего дня
-	allDays = Array.prototype.slice.call(document.querySelectorAll('.day'));	//массив всех ДНИ
-	elapsedDays = function() { 													//количество прошедших дней - равен текущему дню из года
-		for(let i = 0; i < allDays.length; i++) {
-			if(!$(allDays[i]).hasClass('today')) {continue;} else {return i;}
-		}
-	};
-
+	allDays = Array.prototype.slice.call(document.querySelectorAll('.day'));	//из NodeList в массив
 };
+
+function elapsedDays() { 													//количество прошедших дней - равен текущему дню из года
+	for(let i = 0; i < allDays.length; i++) {
+		if(!$(allDays[i]).hasClass('today')) {continue;} else {return i;}
+	}
+};
+
 function todayDay() {
 	today = monthes[stateDate.getMonth()].querySelector('.month-days').querySelectorAll('p').item(stateDate.getDate()-1);
 	monthes[stateDate.getMonth()].className += ' current-month';
 	today.className += ' today';
 }
-//---------------------------------------------------
 
-//МЕТОДОМ ПРОФИЛЕЙ
-//т.е.
-//ВЫБИРАЕТСЯ ПРОФИЛЬ
-//ВЫБИРАЕТСЯ ПЕРВЫЙ РАБОЧИЙ ДЕНЬ СМЕНЫ
-//РАСЧИТЫВАЕТСЯ ГРАФИК РАБОЧИХ ДНЕЙ
-
-function removeSelectSchedule(elem){ //выделяет выбранный класс 
+function removeSelectSchedule(elem){ 
 	let schedules = document.querySelectorAll('.schedule-variable');
 	schedules.forEach((e) => {
 		$(e).removeClass('selectedSchedule');
@@ -86,19 +80,16 @@ function removeSelectSchedule(elem){ //выделяет выбранный кл�
 $(document).on('click', '.schedule-5for2', function() {
 	schedule = '5for2';
 	removeSelectSchedule(this);
-	_5for2();
 });
 
 $(document).on('click', '.schedule-2for2', function() {
 	schedule = '2for2';
 	removeSelectSchedule(this);
-	_2for2();
 });
 
 $(document).on('click', '.schedule-1for1', function() {
 	schedule = '1for1';
 	removeSelectSchedule(this);
-	_1for1();
 });
 
 $(document).on('click', '.day', function () {
